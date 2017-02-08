@@ -1,0 +1,2 @@
+io.buoyant.linkerd.zipkin.HttpInitializer
+io.buoyant.linkerd.zipkin.KafkaInitializer
