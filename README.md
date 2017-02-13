@@ -39,7 +39,6 @@ This telemeter writes tracing data to zipkin over HTTP. Sample configuration:
 
 ```yaml
 telemetry:
-- kind: io.l5d.commonMetrics
 - kind: io.zipkin.http
   host: localhost:9411
   initialSampleRate: 0.02
@@ -60,7 +59,6 @@ This telemeter writes tracing data to zipkin using Kafka. Sample configuration:
 
 ```yaml
 telemetry:
-- kind: io.l5d.commonMetrics
 - kind: io.zipkin.kafka
   bootstrapServers: localhost:9092
   initialSampleRate: 0.02
