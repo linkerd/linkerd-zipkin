@@ -29,7 +29,7 @@ case class HttpConfig(
 
   def mk(params: Stack.Params): HttpTelemeter = {
     val param.Stats(stats) = params[param.Stats]
-    val tracer = HttpZipkinTracer.create(config, stats.scope("zipkin.http"))
+    val tracer = HttpZipkinTracer.create(config, stats.scope("io.zipkin.http"))
     new HttpTelemeter(tracer)
   }
 }

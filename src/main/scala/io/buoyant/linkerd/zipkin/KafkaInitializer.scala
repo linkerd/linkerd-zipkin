@@ -27,7 +27,7 @@ case class KafkaConfig(
 
   def mk(params: Stack.Params): KafkaTelemeter = {
     val param.Stats(stats) = params[param.Stats]
-    val tracer = KafkaZipkinTracer.create(config, stats.scope("zipkin.kafka"))
+    val tracer = KafkaZipkinTracer.create(config, stats.scope("io.zipkin.kafka"))
     new KafkaTelemeter(tracer)
   }
 }
