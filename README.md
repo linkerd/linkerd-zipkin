@@ -11,23 +11,26 @@ https://github.com/openzipkin/zipkin-finagle) library.
 To build a plugin jar, run:
 
 ```bash
-./sbt assembly
+$ ./sbt assembly
 ```
 
-That will build a linkerd-zipkin plugin jar in `target/scala-2.11/`. Put that
-jar in linkerd's class path to make the telemeters available.
+That will build a linkerd-zipkin plugin jar in `plugins/`. Put that jar in
+linkerd's class path to make the telemeters available.
 
 ### Docker
 
-If you're using docker, you can instead use a docker image that already has
-telemeters loaded. To build the docker image, run:
+If you're using Docker, this repo provides a [Dockerfile](Dockerfile) that you
+can use to layer in the plugin jar on top of the linkerd base image. To build,
+run:
 
 ```bash
-./sbt assembly
+$ ./sbt assembly
+$ docker build -t linkerd-zipkin:latest .
 ```
 
-That will build a docker image called `linkerd/linkerd-zipkin`, which runs
-linkerd and autoloads the telemeters from this repo.
+That will build a docker image called `linkerd-zipkin:latest`, which runs
+linkerd and autoloads the telemeters from this repo. You can tag that image
+as needed and push to your own docker repo for deployment.
 
 ## Usage
 

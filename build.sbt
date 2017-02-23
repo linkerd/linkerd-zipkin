@@ -5,7 +5,7 @@ def finagle(mod: String) =
   "com.twitter" %% s"finagle-$mod" % "6.41.0"
 
 def telemetery(mod: String) =
-  "io.buoyant" %% s"telemetry-$mod" % "0.8.6-SNAPSHOT" // TODO: switch to stable
+  "io.buoyant" %% s"telemetry-$mod" % "0.9.0"
 
 def zipkin(mod: String) =
   "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "0.3.4"
@@ -15,7 +15,6 @@ def scalatest() =
 
 val `linkerd-zipkin` =
   project.in(file("."))
-    .enablePlugins(DockerPlugin)
     .settings(
       organization := "io.buoyant",
       version := "0.0.1",
@@ -43,12 +42,5 @@ val `linkerd-zipkin` =
         case path => (assemblyMergeStrategy in assembly).value(path)
       },
       assemblyJarName in assembly := s"${name.value}-${version.value}.jar",
-      docker <<= (docker dependsOn assembly),
-      dockerfile in docker := new Dockerfile {
-        from("buoyantio/linkerd:0.8.6-SNAPSHOT") // TODO: switch to stable
-        val pluginSrc = (assemblyOutputPath in assembly).value
-        val pluginTarget = "$L5D_HOME/plugins/" + (assemblyJarName in assembly).value
-        copy(pluginSrc, pluginTarget)
-      },
-      imageNames in docker := Seq(ImageName(s"linkerd/${name.value}"))
+      assemblyOutputPath in assembly := file(s"plugins/${(assemblyJarName in assembly).value}")
     )
