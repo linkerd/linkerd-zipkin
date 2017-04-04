@@ -5,7 +5,7 @@ def finagle(mod: String) =
   "com.twitter" %% s"finagle-$mod" % "6.41.0"
 
 def telemetery(mod: String) =
-  "io.buoyant" %% s"telemetry-$mod" % "0.9.0"
+  "io.buoyant" %% s"telemetry-$mod" % "0.9.1"
 
 def zipkin(mod: String) =
   "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "0.3.4"
