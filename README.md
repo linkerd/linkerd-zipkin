@@ -15,7 +15,9 @@ $ ./sbt assembly
 ```
 
 That will build a linkerd-zipkin plugin jar in `plugins/`. Put that jar in
-linkerd's class path to make the telemeters available.
+linkerd's class path to make the telemeters available. Further information on
+installing plugins is available in the linkerd
+[plugin documentation](https://linkerd.io/in-depth/plugin/#installing).
 
 ### Docker
 
@@ -42,7 +44,6 @@ This telemeter writes tracing data to zipkin over HTTP. Sample configuration:
 
 ```yaml
 telemetry:
-- kind: io.l5d.commonMetrics
 - kind: io.zipkin.http
   host: localhost:9411
   initialSampleRate: 0.02
@@ -63,7 +64,6 @@ This telemeter writes tracing data to zipkin using Kafka. Sample configuration:
 
 ```yaml
 telemetry:
-- kind: io.l5d.commonMetrics
 - kind: io.zipkin.kafka
   bootstrapServers: localhost:9092
   initialSampleRate: 0.02
