@@ -1,17 +1,17 @@
 def twitterUtil(mod: String) =
-  "com.twitter" %% s"util-$mod" %  "6.40.0"
+  "com.twitter" %% s"util-$mod" %  "6.43.0"
 
 def finagle(mod: String) =
-  "com.twitter" %% s"finagle-$mod" % "6.41.0"
+  "com.twitter" %% s"finagle-$mod" % "6.44.0"
 
 def telemetery(mod: String) =
   "io.buoyant" %% s"telemetry-$mod" % "0.9.1"
 
 def zipkin(mod: String) =
-  "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "0.3.4"
+  "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "0.3.6"
 
 def scalatest() =
-  "org.scalatest" %% "scalatest" % "2.2.4"
+  "org.scalatest" %% "scalatest" % "3.0.1"
 
 val `linkerd-zipkin` =
   project.in(file("."))
