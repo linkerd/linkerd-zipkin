@@ -8,7 +8,7 @@ def telemetery(mod: String) =
   "io.buoyant" %% s"telemetry-$mod" % "1.1.1"
 
 def zipkin(mod: String) =
-  "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "0.4.1-SNAPSHOT"
+  "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "1.0.0"
 
 def scalatest() =
   "org.scalatest" %% "scalatest" % "3.0.1"
