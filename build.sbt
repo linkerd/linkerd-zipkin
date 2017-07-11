@@ -1,14 +1,14 @@
 def twitterUtil(mod: String) =
-  "com.twitter" %% s"util-$mod" %  "6.43.0"
+  "com.twitter" %% s"util-$mod" %  "6.45.0"
 
 def finagle(mod: String) =
-  "com.twitter" %% s"finagle-$mod" % "6.44.0"
+  "com.twitter" %% s"finagle-$mod" % "6.45.0"
 
 def telemetery(mod: String) =
-  "io.buoyant" %% s"telemetry-$mod" % "1.0.2"
+  "io.buoyant" %% s"telemetry-$mod" % "1.1.1"
 
 def zipkin(mod: String) =
-  "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "0.4.0"
+  "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "1.0.0"
 
 def scalatest() =
   "org.scalatest" %% "scalatest" % "3.0.1"
