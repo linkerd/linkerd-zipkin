@@ -5,10 +5,10 @@ def finagle(mod: String) =
   "com.twitter" %% s"finagle-$mod" % "6.45.0"
 
 def telemetery(mod: String) =
-  "io.buoyant" %% s"telemetry-$mod" % "1.1.1"
+  "io.buoyant" %% s"telemetry-$mod" % "1.2.1"
 
 def zipkin(mod: String) =
-  "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "1.0.0"
+  "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "1.0.1"
 
 def scalatest() =
   "org.scalatest" %% "scalatest" % "3.0.1"
