@@ -4,7 +4,7 @@ def twitterUtil(mod: String) =
 def finagle(mod: String) =
   "com.twitter" %% s"finagle-$mod" % "7.1.0"
 
-def telemetery(mod: String) =
+def telemetry(mod: String) =
   "io.buoyant" %% s"telemetry-$mod" % "1.3.3"
 
 def zipkin(mod: String) =
@@ -28,7 +28,7 @@ val `linkerd-zipkin` =
       libraryDependencies ++= Seq(
         finagle("core"),
         finagle("zipkin-core"),
-        telemetery("core"),
+        telemetry("core"),
         twitterUtil("stats"),
         zipkin("http"),
         zipkin("kafka"),
