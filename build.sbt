@@ -19,7 +19,9 @@ val `linkerd-zipkin` =
       organization := "io.buoyant",
       version := "0.0.1",
       scalaVersion in GlobalScope := "2.12.1",
-      ivyScala := ivyScala.value.map(_.copy(overrideScalaVersion = true)),
+      scalaModuleInfo := scalaModuleInfo
+        .value
+        .map(_.withOverrideScalaVersion(true)),
       resolvers ++= Seq(
         "twitter-repo" at "https://maven.twttr.com",
         Resolver.mavenLocal,
