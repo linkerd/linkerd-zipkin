@@ -42,5 +42,34 @@ val `linkerd-zipkin` =
         case path => (assemblyMergeStrategy in assembly).value(path)
       },
       assemblyJarName in assembly := s"${name.value}-${version.value}.jar",
-      assemblyOutputPath in assembly := file(s"plugins/${(assemblyJarName in assembly).value}")
+      assemblyOutputPath in assembly := file(s"plugins/${(assemblyJarName in assembly).value}"),
+      // Sonatype publishing
+      publishArtifact in Test := false,
+      pomIncludeRepository := { _ => false },
+      publishMavenStyle := true,
+      pomExtra :=
+        <licenses>
+          <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+          </license>
+        </licenses>
+        <scm>
+          <url>git@github.com:BuoyantIO/linkerd.git</url>
+          <connection>scm:git:git@github.com:BuoyantIO/linkerd.git</connection>
+        </scm>
+        <developers>
+          <developer>
+            <id>buoyant</id>
+            <name>Buoyant Inc.</name>
+            <url>https://buoyant.io/</url>
+          </developer>
+        </developers>,
+      publishTo := {
+        val nexus = "https://oss.sonatype.org/"
+        if (version.value.trim.endsWith("SNAPSHOT"))
+          Some("snapshots" at nexus + "content/repositories/snapshots")
+        else
+          Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+      }
     )
