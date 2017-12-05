@@ -5,7 +5,7 @@ def finagle(mod: String) =
   "com.twitter" %% s"finagle-$mod" % "7.1.0"
 
 def telemetry(mod: String) =
-  "io.buoyant" %% s"telemetry-$mod" % "1.3.3"
+  "io.buoyant" %% s"telemetry-$mod" % linkerdVersion
 
 def zipkin(mod: String) =
   "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "1.1.0"
@@ -13,11 +13,13 @@ def zipkin(mod: String) =
 def scalatest() =
   "org.scalatest" %% "scalatest" % "3.0.1"
 
+val linkerdVersion = "1.3.3"
+
 val `linkerd-zipkin` =
   project.in(file("."))
     .settings(
       organization := "io.buoyant",
-      version := "0.0.1",
+      version := linkerdVersion,
       homepage := Some(url("https://linkerd.io")),
       scalaVersion in GlobalScope := "2.12.1",
       ivyScala := ivyScala.value.map(_.copy(overrideScalaVersion = true)),
