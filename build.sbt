@@ -18,6 +18,7 @@ val `linkerd-zipkin` =
     .settings(
       organization := "io.buoyant",
       version := "0.0.1",
+      homepage := Some(url("https://linkerd.io")),
       scalaVersion in GlobalScope := "2.12.1",
       ivyScala := ivyScala.value.map(_.copy(overrideScalaVersion = true)),
       resolvers ++= Seq(
@@ -43,7 +44,7 @@ val `linkerd-zipkin` =
       },
       assemblyJarName in assembly := s"${name.value}-${version.value}.jar",
       assemblyOutputPath in assembly := file(s"plugins/${(assemblyJarName in assembly).value}"),
-      // Sonatype publishing
+      // Sonatype publishinga
       publishArtifact in Test := false,
       pomIncludeRepository := { _ => false },
       publishMavenStyle := true,
@@ -55,8 +56,8 @@ val `linkerd-zipkin` =
           </license>
         </licenses>
         <scm>
-          <url>git@github.com:BuoyantIO/linkerd.git</url>
-          <connection>scm:git:git@github.com:BuoyantIO/linkerd.git</connection>
+          <url>git@github.com:linkerd/linkerd-zipkin.git</url>
+          <connection>scm:git:git@github.com:linkerd/linkerd-zipkin.git</connection>
         </scm>
         <developers>
           <developer>
