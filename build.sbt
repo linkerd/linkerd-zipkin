@@ -1,3 +1,6 @@
+
+val linkerdVersion = "1.3.3"
+
 def twitterUtil(mod: String) =
   "com.twitter" %% s"util-$mod" %  "7.1.0"
 
@@ -12,8 +15,6 @@ def zipkin(mod: String) =
 
 def scalatest() =
   "org.scalatest" %% "scalatest" % "3.0.1"
-
-val linkerdVersion = "1.3.3"
 
 val `linkerd-zipkin` =
   project.in(file("."))
