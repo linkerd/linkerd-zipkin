@@ -1,5 +1,5 @@
 
-val linkerdVersion = "1.3.4"
+val linkerdVersion = "1.3.5"
 
 def twitterUtil(mod: String) =
   "com.twitter" %% s"util-$mod" %  "7.1.0"
