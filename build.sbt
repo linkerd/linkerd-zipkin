@@ -1,20 +1,45 @@
+import sbtassembly.{AssemblyUtils, MergeStrategy}
 
-val linkerdVersion = "1.3.6"
+val linkerdVersion = "1.4.3"
 
 def twitterUtil(mod: String) =
-  "com.twitter" %% s"util-$mod" %  "7.1.0"
+  "com.twitter" %% s"util-$mod" %  "18.4.0"
 
 def finagle(mod: String) =
-  "com.twitter" %% s"finagle-$mod" % "7.1.0"
+  "com.twitter" %% s"finagle-$mod" % "18.4.0"
 
 def telemetry(mod: String) =
   "io.buoyant" %% s"telemetry-$mod" % linkerdVersion
 
 def zipkin(mod: String) =
-  "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "1.1.0"
+  "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "1.2.4"
 
 def scalatest() =
   "org.scalatest" %% "scalatest" % "3.0.1"
+
+/**
+ * finagle-thrift includes files copied from libthrift that cause assembly merge conflicts.  To
+ * work around this, we use a merge strategy that uses the files from libthrift in the event of
+ * a conflict.  This should be removed once https://github.com/twitter/finagle/issues/688 is
+ * resolved.
+ */
+val libthriftMergeStrategy = new MergeStrategy {
+  override def name: String = "libthrift-merge-strategy"
+  override def apply(
+    tempDir: File,
+    path: String,
+    files: Seq[File]
+  ): Either[String, Seq[(File, String)]] = {
+    Right {
+      files.find { f =>
+        AssemblyUtils.sourceOfFileForMerge(tempDir, f)._1.getName == "libthrift-0.10.0.jar"
+      }.map { f =>
+        f -> path
+      }.toSeq
+    }
+  }
+}
+
 
 val `linkerd-zipkin` =
   project.in(file("."))
@@ -43,6 +68,7 @@ val `linkerd-zipkin` =
         case "BUILD" => MergeStrategy.discard
         case "com/twitter/common/args/apt/cmdline.arg.info.txt.1" => MergeStrategy.discard
         case "META-INF/io.netty.versions.properties" => MergeStrategy.last
+        case path if path.startsWith("org/apache/thrift/protocol") => libthriftMergeStrategy
         case path => (assemblyMergeStrategy in assembly).value(path)
       },
       assemblyJarName in assembly := s"${name.value}-${version.value}.jar",
