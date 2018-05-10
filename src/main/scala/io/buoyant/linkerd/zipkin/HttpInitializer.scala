@@ -1,6 +1,6 @@
 package io.buoyant.linkerd.zipkin
 
-import com.twitter.finagle.Stack
+import com.twitter.finagle.{Stack, param}
 import com.twitter.finagle.stats.NullStatsReceiver
 import com.twitter.finagle.tracing.Tracer
 import com.twitter.finagle.zipkin.core.Sampler
@@ -20,18 +20,18 @@ case class HttpConfig(
   initialSampleRate: Option[Double]
 ) extends TelemeterConfig {
 
-  private[this] val tracer: Tracer = {
-    val config = HttpZipkinTracer.Config.builder()
-      .host(host.getOrElse("localhost:9411"))
-      .hostHeader(hostHeader.getOrElse("zipkin"))
-      .compressionEnabled(compressionEnabled.getOrElse(true))
-      .initialSampleRate(initialSampleRate.map(_.toFloat).getOrElse(Sampler.DefaultSampleRate))
-      .build()
+  private[this] val config: HttpZipkinTracer.Config = HttpZipkinTracer.Config.builder()
+    .host(host.getOrElse("localhost:9411"))
+    .hostHeader(hostHeader.getOrElse("zipkin"))
+    .compressionEnabled(compressionEnabled.getOrElse(true))
+    .initialSampleRate(initialSampleRate.map(_.toFloat).getOrElse(Sampler.DefaultSampleRate))
+    .build()
 
-    HttpZipkinTracer.create(config, NullStatsReceiver)
+  def mk(params: Stack.Params): HttpTelemeter = {
+    val param.Stats(stats) = params[param.Stats]
+    val tracer = HttpZipkinTracer.create(config, stats.scope("io.zipkin.http"))
+    new HttpTelemeter(tracer)
   }
-
-  def mk(params: Stack.Params): HttpTelemeter = new HttpTelemeter(tracer)
 }
 
 class HttpTelemeter(underlying: Tracer) extends Telemeter {
