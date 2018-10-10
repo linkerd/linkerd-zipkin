@@ -5,7 +5,7 @@ import com.twitter.finagle.stats.NullStatsReceiver
 import com.twitter.finagle.tracing.Tracer
 import com.twitter.finagle.zipkin.core.Sampler
 import io.buoyant.telemetry.{Telemeter, TelemeterConfig, TelemeterInitializer}
-import zipkin.finagle.kafka.KafkaZipkinTracer
+import zipkin2.finagle.kafka.KafkaZipkinTracer
 
 class KafkaInitializer extends TelemeterInitializer {
   type Config = KafkaConfig
