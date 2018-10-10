@@ -12,7 +12,7 @@ def telemetry(mod: String) =
   "io.buoyant" %% s"telemetry-$mod" % linkerdVersion
 
 def zipkin(mod: String) =
-  "io.zipkin.finagle" %% s"zipkin-finagle-$mod" % "1.2.4"
+  "io.zipkin.finagle2" %% s"zipkin-finagle-$mod" % "2.0.5"
 
 def scalatest() =
   "org.scalatest" %% "scalatest" % "3.0.1"
