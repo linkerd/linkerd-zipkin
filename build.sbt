@@ -1,18 +1,18 @@
 import sbtassembly.{AssemblyUtils, MergeStrategy}
 
-val linkerdVersion = "1.6.3"
+val linkerdVersion = "1.7.0"
 
 def twitterUtil(mod: String) =
-  "com.twitter" %% s"util-$mod" %  "19.1.0"
+  "com.twitter" %% s"util-$mod" %  "19.5.1"
 
 def finagle(mod: String) =
-  "com.twitter" %% s"finagle-$mod" % "19.1.0"
+  "com.twitter" %% s"finagle-$mod" % "19.5.1"
 
 def telemetry(mod: String) =
   "io.buoyant" %% s"telemetry-$mod" % linkerdVersion
 
 def zipkin(mod: String) =
-  "io.zipkin.finagle2" %% s"zipkin-finagle-$mod" % "2.0.10"
+  "io.zipkin.finagle2" %% s"zipkin-finagle-$mod" % "2.0.15"
 
 def scalatest() =
   "org.scalatest" %% "scalatest" % "3.0.1"
