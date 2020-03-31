@@ -1,6 +1,6 @@
 import sbtassembly.{AssemblyUtils, MergeStrategy}
 
-val linkerdVersion = "1.6.3"
+val linkerdVersion = "1.7.0"
 
 def twitterUtil(mod: String) =
   "com.twitter" %% s"util-$mod" %  "19.1.0"
